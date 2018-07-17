@@ -1,0 +1,134 @@
+---
+title: "Sample estimation for TNSeq of Spyogenes (2017 including Andrew)."
+author: "atb"
+date: "`r Sys.Date()`"
+output:
+ html_document:
+  code_download: true
+  code_folding: show
+  fig_caption: true
+  fig_height: 7
+  fig_width: 7
+  highlight: default
+  keep_md: false
+  mode: selfcontained
+  number_sections: true
+  self_contained: true
+  theme: readable
+  toc: true
+  toc_float:
+    collapsed: false
+    smooth_scroll: false
+---
+
+<style>
+  body .main-container {
+    max-width: 1600px;
+}
+</style>
+
+```{r options, include=FALSE}
+## These are the options I tend to favor
+library("hpgltools")
+tt <- devtools::load_all("~/hpgltools")
+knitr::opts_knit$set(progress=TRUE,
+                     verbose=TRUE,
+                     width=90,
+                     echo=TRUE)
+knitr::opts_chunk$set(error=TRUE,
+                      fig.width=8,
+                      fig.height=8,
+                      dpi=96)
+options(digits=4,
+        stringsAsFactors=FALSE,
+        knitr.duplicate.label="allow")
+ggplot2::theme_set(ggplot2::theme_bw(base_size=10))
+set.seed(1)
+previous_file <- "01_annotation.Rmd"
+ver <- "20180717"
+
+tmp <- sm(loadme(filename=paste0(gsub(pattern="\\.Rmd", replace="", x=previous_file), "-v", ver, ".rda.xz")))
+
+rmd_file <- "02_sample_estimation.Rmd"
+```
+
+# Sample Estimation, Spyogenes: `r ver`
+
+This document is concerned with analyzing TNSeq from S.pyogenes.
+
+```{r initial_estimation, fig.show="hide"}
+rpmi_expt <- subset_expt(expt=sp_expt, subset="experiment=='metal homeostasis'")
+rpmi_metrics <- graph_metrics(expt=rpmi_expt)
+
+rpmi_filt <- sm(normalize_expt(rpmi_expt, filter=TRUE))
+rpmi_norm <- sm(normalize_expt(rpmi_expt, filter=TRUE, convert="cpm", norm="quant", transform="log2"))
+
+rpmi_norm_metrics <- graph_metrics(expt=rpmi_norm)
+```
+
+## Show some graphs from before normalization.
+
+```{r mouse_show_images_pre}
+rpmi_metrics$legend
+rpmi_metrics$libsize
+## A few samples might be a problem: hpgl0898, hpgl0879; but I am guessing a factor
+## of <4 between the highest and lowest samples should not be too big of a problem.
+rpmi_metrics$density
+## Nice consistent sample densities
+rpmi_metrics$corheat
+```
+
+## Now some plots from after normalization
+
+```{r mouse_show_images_post}
+norm_pca <- plot_pca(rpmi_norm, cis=FALSE)
+norm_pca$plot
+## This clustering is kind of terrible.
+```
+
+## Try a couple of surrogate variables
+
+Given the wretched clustering observed, I figure I should try a couple tools
+from ruv/sva and see if they help.
+
+```{r batch_testing}
+rpmi_batch1 <- normalize_expt(rpmi_expt, transform="log2", convert="cpm",
+                              filter=TRUE, batch="fsva")
+plot_pca(rpmi_batch1)$plot
+plot_corheat(rpmi_batch1)$plot
+## This looks a bit more encouraging.
+
+rpmi_batch2 <- normalize_expt(rpmi_expt, transform="log2", convert="cpm",
+                              filter=TRUE, batch="svaseq")
+plot_pca(rpmi_batch2)$plot
+## as does this.
+
+rpmi_batch_written <- write_expt(expt=rpmi_expt, transform="log2", convert="cpm",
+                                 filter=TRUE, batch="fsva", violin=TRUE,
+                                 excel=paste0("excel/rpmi_fsva-v", ver, ".xlsx"))
+```
+
+```{r surrogate_testing}
+varpart_test <- varpart(expt=rpmi_filt, predictor=NULL,
+                        factors=c("coverage", "replicate", "time", "cuzn", "medium"))
+varpart_test$partition_plot
+varpart_test$percent_plot
+
+surrogate_test <- compare_surrogate_estimates(rpmi_filt)
+
+surrogate_test$sva_unsupervised_adjust$svs_sample
+rpmi_metrics$libsize
+## Given the contribution of coverage in the variancePartition results above, one might
+## assume that the library sizes will correspond to the surrogates detected by sva and friends.
+## This appears to not be the case.
+surrogate_test$plot
+## it looks like the various surrogate estimators mostly agree on this data.
+```
+
+```{r saveme}
+message(paste0("This is hpgltools commit: ", get_git_commit()))
+pander::pander(sessionInfo())
+this_save <- paste0(gsub(pattern="\\.Rmd", replace="", x=rmd_file), "-v", ver, ".rda.xz")
+message(paste0("Saving to ", this_save))
+tmp <- sm(saveme(filename=this_save))
+```
