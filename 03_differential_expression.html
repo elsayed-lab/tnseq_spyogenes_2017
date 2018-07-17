@@ -1669,23 +1669,25 @@ div.tocify {
                 &quot;t3t1&quot; = c(&quot;rpmi_t3&quot;, &quot;thy_t1&quot;),
                 &quot;t2zn&quot; = c(&quot;rpmi_t2_highzn&quot;, &quot;rpmi_t2_lowzn&quot;),
                 &quot;t3zn&quot; = c(&quot;rpmi_t3_highzn&quot;, &quot;rpmi_t3_lowzn&quot;),
-                &quot;t2cu&quot; = c(&quot;rpmi_t2_highcu&quot;, &quot;rpmi_t2_lowcu&quot;),
-                &quot;t3cu&quot; = c(&quot;rpmi_t3_highcu&quot;, &quot;rpmi_t3_lowcu&quot;),
+##                &quot;t2cu&quot; = c(&quot;rpmi_t2_highcu&quot;, &quot;rpmi_t2_lowcu&quot;),
+##                &quot;t3cu&quot; = c(&quot;rpmi_t3_highcu&quot;, &quot;rpmi_t3_lowcu&quot;),
                 &quot;time_highzn&quot; = c(&quot;rpmi_t3_highzn&quot;, &quot;rpmi_t2_highzn&quot;),
                 &quot;time_lowzn&quot; = c(&quot;rpmi_t3_lowzn&quot;, &quot;rpmi_t2_lowzn&quot;),
-                &quot;time_highcu&quot; = c(&quot;rpmi_t3_highcu&quot;, &quot;rpmi_t2_highcu&quot;),
-                &quot;time_lowcu&quot; = c(&quot;rpmi_t3_lowcu&quot;, &quot;rpmi_t2_lowcu&quot;),
+##                &quot;time_highcu&quot; = c(&quot;rpmi_t3_highcu&quot;, &quot;rpmi_t2_highcu&quot;),
+##                &quot;time_lowcu&quot; = c(&quot;rpmi_t3_lowcu&quot;, &quot;rpmi_t2_lowcu&quot;),
                 &quot;t2_rpmi_highzn&quot; = c(&quot;rpmi_t2_highzn&quot;, &quot;rpmi_t2&quot;),
                 &quot;t3_rpmi_highzn&quot; = c(&quot;rpmi_t3_highzn&quot;, &quot;rpmi_t3&quot;),
                 &quot;t2_rpmi_lowzn&quot; = c(&quot;rpmi_t2_lowzn&quot;, &quot;rpmi_t2&quot;),
-                &quot;t3_rpmi_lowzn&quot; = c(&quot;rpmi_t3_lowzn&quot;, &quot;rpmi_t3&quot;),
-                &quot;t2_rpmi_highcu&quot; = c(&quot;rpmi_t2_highcu&quot;, &quot;rpmi_t2&quot;),
-                &quot;t3_rpmi_highcu&quot; = c(&quot;rpmi_t3_highcu&quot;, &quot;rpmi_t3&quot;),
-                &quot;t2_rpmi_lowcu&quot; = c(&quot;rpmi_t2_lowcu&quot;, &quot;rpmi_t2&quot;),
-                &quot;t3_rpmi_lowcu&quot; = c(&quot;rpmi_t3_lowcu&quot;, &quot;rpmi_t3&quot;))
+                &quot;t3_rpmi_lowzn&quot; = c(&quot;rpmi_t3_lowzn&quot;, &quot;rpmi_t3&quot;)
+##                &quot;t2_rpmi_highcu&quot; = c(&quot;rpmi_t2_highcu&quot;, &quot;rpmi_t2&quot;),
+##                &quot;t3_rpmi_highcu&quot; = c(&quot;rpmi_t3_highcu&quot;, &quot;rpmi_t3&quot;),
+##                &quot;t2_rpmi_lowcu&quot; = c(&quot;rpmi_t2_lowcu&quot;, &quot;rpmi_t2&quot;),
+##                &quot;t3_rpmi_lowcu&quot; = c(&quot;rpmi_t3_lowcu&quot;, &quot;rpmi_t3&quot;))
+                )
 initial_write &lt;- combine_de_tables(all_pairwise_result=initial_diff,
                                    excel=paste0(&quot;excel/initial_diff-v&quot;, ver, &quot;.xlsx&quot;),
                                    keepers=keepers)</code></pre>
+<pre><code>## Deleting the file excel/initial_diff-v20180717.xlsx before writing the tables.</code></pre>
 <pre><code>## Writing a legend of columns.</code></pre>
 <pre><code>## Printing a pca plot before/after surrogates/batch estimation.</code></pre>
 <pre><code>## Too few points to calculate an ellipse
@@ -1696,42 +1698,26 @@ initial_write &lt;- combine_de_tables(all_pairwise_result=initial_diff,
 ## Too few points to calculate an ellipse
 ## Too few points to calculate an ellipse
 ## Too few points to calculate an ellipse</code></pre>
-<pre><code>## Working on 1/18: t2t1</code></pre>
+<pre><code>## Working on 1/10: t2t1</code></pre>
 <pre><code>## Found inverse table with thy_t1_vs_rpmi_t2</code></pre>
-<pre><code>## Working on 2/18: t3t1</code></pre>
+<pre><code>## Working on 2/10: t3t1</code></pre>
 <pre><code>## Found inverse table with thy_t1_vs_rpmi_t3</code></pre>
-<pre><code>## Working on 3/18: t2zn</code></pre>
+<pre><code>## Working on 3/10: t2zn</code></pre>
 <pre><code>## Found inverse table with rpmi_t2_lowzn_vs_rpmi_t2_highzn</code></pre>
-<pre><code>## Working on 4/18: t3zn</code></pre>
+<pre><code>## Working on 4/10: t3zn</code></pre>
 <pre><code>## Found inverse table with rpmi_t3_lowzn_vs_rpmi_t3_highzn</code></pre>
-<pre><code>## Working on 5/18: t2cu</code></pre>
-<pre><code>## Found inverse table with rpmi_t2_lowcu_vs_rpmi_t2_highcu</code></pre>
-<pre><code>## Working on 6/18: t3cu</code></pre>
-<pre><code>## Found inverse table with rpmi_t3_lowcu_vs_rpmi_t3_highcu</code></pre>
-<pre><code>## Working on 7/18: time_highzn</code></pre>
+<pre><code>## Working on 5/10: time_highzn</code></pre>
 <pre><code>## Found table with rpmi_t3_highzn_vs_rpmi_t2_highzn</code></pre>
-<pre><code>## Working on 8/18: time_lowzn</code></pre>
+<pre><code>## Working on 6/10: time_lowzn</code></pre>
 <pre><code>## Found table with rpmi_t3_lowzn_vs_rpmi_t2_lowzn</code></pre>
-<pre><code>## Working on 9/18: time_highcu</code></pre>
-<pre><code>## Found table with rpmi_t3_highcu_vs_rpmi_t2_highcu</code></pre>
-<pre><code>## Working on 10/18: time_lowcu</code></pre>
-<pre><code>## Found table with rpmi_t3_lowcu_vs_rpmi_t2_lowcu</code></pre>
-<pre><code>## Working on 11/18: t2_rpmi_highzn</code></pre>
+<pre><code>## Working on 7/10: t2_rpmi_highzn</code></pre>
 <pre><code>## Found table with rpmi_t2_highzn_vs_rpmi_t2</code></pre>
-<pre><code>## Working on 12/18: t3_rpmi_highzn</code></pre>
+<pre><code>## Working on 8/10: t3_rpmi_highzn</code></pre>
 <pre><code>## Found table with rpmi_t3_highzn_vs_rpmi_t3</code></pre>
-<pre><code>## Working on 13/18: t2_rpmi_lowzn</code></pre>
+<pre><code>## Working on 9/10: t2_rpmi_lowzn</code></pre>
 <pre><code>## Found table with rpmi_t2_lowzn_vs_rpmi_t2</code></pre>
-<pre><code>## Working on 14/18: t3_rpmi_lowzn</code></pre>
+<pre><code>## Working on 10/10: t3_rpmi_lowzn</code></pre>
 <pre><code>## Found table with rpmi_t3_lowzn_vs_rpmi_t3</code></pre>
-<pre><code>## Working on 15/18: t2_rpmi_highcu</code></pre>
-<pre><code>## Found table with rpmi_t2_highcu_vs_rpmi_t2</code></pre>
-<pre><code>## Working on 16/18: t3_rpmi_highcu</code></pre>
-<pre><code>## Found table with rpmi_t3_highcu_vs_rpmi_t3</code></pre>
-<pre><code>## Working on 17/18: t2_rpmi_lowcu</code></pre>
-<pre><code>## Found table with rpmi_t2_lowcu_vs_rpmi_t2</code></pre>
-<pre><code>## Working on 18/18: t3_rpmi_lowcu</code></pre>
-<pre><code>## Found table with rpmi_t3_lowcu_vs_rpmi_t3</code></pre>
 <pre><code>## Adding venn plots for rpmi_t2_vs_thy_t1.</code></pre>
 <pre><code>## Limma expression coefficients for rpmi_t2_vs_thy_t1; R^2: 0.983; equation: y = 0.983x + 0.17</code></pre>
 <pre><code>## Edger expression coefficients for rpmi_t2_vs_thy_t1; R^2: 0.984; equation: y = 1.02x - 0.075</code></pre>
@@ -1748,14 +1734,6 @@ initial_write &lt;- combine_de_tables(all_pairwise_result=initial_diff,
 <pre><code>## Limma expression coefficients for rpmi_t3_highzn_vs_rpmi_t3_lowzn; R^2: 0.994; equation: y = 0.998x + 0.0153</code></pre>
 <pre><code>## Edger expression coefficients for rpmi_t3_highzn_vs_rpmi_t3_lowzn; R^2: 0.993; equation: y = 0.993x + 0.0525</code></pre>
 <pre><code>## DESeq2 expression coefficients for rpmi_t3_highzn_vs_rpmi_t3_lowzn; R^2: 0.993; equation: y = 0.993x + 0.0684</code></pre>
-<pre><code>## Adding venn plots for rpmi_t2_highcu_vs_rpmi_t2_lowcu.</code></pre>
-<pre><code>## Limma expression coefficients for rpmi_t2_highcu_vs_rpmi_t2_lowcu; R^2: 0.997; equation: y = 0.996x + 0.0295</code></pre>
-<pre><code>## Edger expression coefficients for rpmi_t2_highcu_vs_rpmi_t2_lowcu; R^2: 0.997; equation: y = 1x - 0.0227</code></pre>
-<pre><code>## DESeq2 expression coefficients for rpmi_t2_highcu_vs_rpmi_t2_lowcu; R^2: 0.997; equation: y = 1x - 0.0115</code></pre>
-<pre><code>## Adding venn plots for rpmi_t3_highcu_vs_rpmi_t3_lowcu.</code></pre>
-<pre><code>## Limma expression coefficients for rpmi_t3_highcu_vs_rpmi_t3_lowcu; R^2: 0.998; equation: y = 1x - 0.0146</code></pre>
-<pre><code>## Edger expression coefficients for rpmi_t3_highcu_vs_rpmi_t3_lowcu; R^2: 0.998; equation: y = 0.998x + 0.0232</code></pre>
-<pre><code>## DESeq2 expression coefficients for rpmi_t3_highcu_vs_rpmi_t3_lowcu; R^2: 0.998; equation: y = 0.998x + 0.0467</code></pre>
 <pre><code>## The sheet name was too long for Excel, truncating it by removing vowels.</code></pre>
 <pre><code>## Adding venn plots for rpmi_t3_highzn_vs_rpmi_t2_highzn.</code></pre>
 <pre><code>## Limma expression coefficients for rpmi_t3_highzn_vs_rpmi_t2_highzn; R^2: 0.993; equation: y = 0.99x + 0.0829</code></pre>
@@ -1765,15 +1743,6 @@ initial_write &lt;- combine_de_tables(all_pairwise_result=initial_diff,
 <pre><code>## Limma expression coefficients for rpmi_t3_lowzn_vs_rpmi_t2_lowzn; R^2: 0.991; equation: y = 0.975x + 0.221</code></pre>
 <pre><code>## Edger expression coefficients for rpmi_t3_lowzn_vs_rpmi_t2_lowzn; R^2: 0.992; equation: y = 0.994x + 0.0699</code></pre>
 <pre><code>## DESeq2 expression coefficients for rpmi_t3_lowzn_vs_rpmi_t2_lowzn; R^2: 0.992; equation: y = 0.994x + 0.0849</code></pre>
-<pre><code>## The sheet name was too long for Excel, truncating it by removing vowels.</code></pre>
-<pre><code>## Adding venn plots for rpmi_t3_highcu_vs_rpmi_t2_highcu.</code></pre>
-<pre><code>## Limma expression coefficients for rpmi_t3_highcu_vs_rpmi_t2_highcu; R^2: 0.995; equation: y = 0.99x + 0.0933</code></pre>
-<pre><code>## Edger expression coefficients for rpmi_t3_highcu_vs_rpmi_t2_highcu; R^2: 0.995; equation: y = 0.995x + 0.0585</code></pre>
-<pre><code>## DESeq2 expression coefficients for rpmi_t3_highcu_vs_rpmi_t2_highcu; R^2: 0.995; equation: y = 0.995x + 0.0761</code></pre>
-<pre><code>## Adding venn plots for rpmi_t3_lowcu_vs_rpmi_t2_lowcu.</code></pre>
-<pre><code>## Limma expression coefficients for rpmi_t3_lowcu_vs_rpmi_t2_lowcu; R^2: 0.995; equation: y = 0.983x + 0.146</code></pre>
-<pre><code>## Edger expression coefficients for rpmi_t3_lowcu_vs_rpmi_t2_lowcu; R^2: 0.996; equation: y = 0.999x + 0.00219</code></pre>
-<pre><code>## DESeq2 expression coefficients for rpmi_t3_lowcu_vs_rpmi_t2_lowcu; R^2: 0.996; equation: y = 1x + 0.000195</code></pre>
 <pre><code>## Adding venn plots for rpmi_t2_highzn_vs_rpmi_t2.</code></pre>
 <pre><code>## Limma expression coefficients for rpmi_t2_highzn_vs_rpmi_t2; R^2: 0.99; equation: y = 0.987x + 0.139</code></pre>
 <pre><code>## Edger expression coefficients for rpmi_t2_highzn_vs_rpmi_t2; R^2: 0.99; equation: y = 1x - 0.00933</code></pre>
@@ -1790,71 +1759,34 @@ initial_write &lt;- combine_de_tables(all_pairwise_result=initial_diff,
 <pre><code>## Limma expression coefficients for rpmi_t3_lowzn_vs_rpmi_t3; R^2: 0.994; equation: y = 0.99x + 0.0862</code></pre>
 <pre><code>## Edger expression coefficients for rpmi_t3_lowzn_vs_rpmi_t3; R^2: 0.994; equation: y = 0.995x + 0.045</code></pre>
 <pre><code>## DESeq2 expression coefficients for rpmi_t3_lowzn_vs_rpmi_t3; R^2: 0.994; equation: y = 0.995x + 0.0597</code></pre>
-<pre><code>## Adding venn plots for rpmi_t2_highcu_vs_rpmi_t2.</code></pre>
-<pre><code>## Limma expression coefficients for rpmi_t2_highcu_vs_rpmi_t2; R^2: 0.994; equation: y = 0.992x + 0.0836</code></pre>
-<pre><code>## Edger expression coefficients for rpmi_t2_highcu_vs_rpmi_t2; R^2: 0.994; equation: y = 1x - 0.0251</code></pre>
-<pre><code>## DESeq2 expression coefficients for rpmi_t2_highcu_vs_rpmi_t2; R^2: 0.994; equation: y = 1x - 0.0223</code></pre>
-<pre><code>## Adding venn plots for rpmi_t3_highcu_vs_rpmi_t3.</code></pre>
-<pre><code>## Limma expression coefficients for rpmi_t3_highcu_vs_rpmi_t3; R^2: 0.994; equation: y = 0.995x + 0.0301</code></pre>
-<pre><code>## Edger expression coefficients for rpmi_t3_highcu_vs_rpmi_t3; R^2: 0.994; equation: y = 0.993x + 0.0488</code></pre>
-<pre><code>## DESeq2 expression coefficients for rpmi_t3_highcu_vs_rpmi_t3; R^2: 0.994; equation: y = 0.993x + 0.0783</code></pre>
-<pre><code>## Adding venn plots for rpmi_t2_lowcu_vs_rpmi_t2.</code></pre>
-<pre><code>## Limma expression coefficients for rpmi_t2_lowcu_vs_rpmi_t2; R^2: 0.992; equation: y = 0.995x + 0.0548</code></pre>
-<pre><code>## Edger expression coefficients for rpmi_t2_lowcu_vs_rpmi_t2; R^2: 0.993; equation: y = 1x - 0.00255</code></pre>
-<pre><code>## DESeq2 expression coefficients for rpmi_t2_lowcu_vs_rpmi_t2; R^2: 0.993; equation: y = 1x - 0.012</code></pre>
-<pre><code>## Adding venn plots for rpmi_t3_lowcu_vs_rpmi_t3.</code></pre>
-<pre><code>## Limma expression coefficients for rpmi_t3_lowcu_vs_rpmi_t3; R^2: 0.994; equation: y = 0.991x + 0.057</code></pre>
-<pre><code>## Edger expression coefficients for rpmi_t3_lowcu_vs_rpmi_t3; R^2: 0.994; equation: y = 0.996x + 0.0198</code></pre>
-<pre><code>## DESeq2 expression coefficients for rpmi_t3_lowcu_vs_rpmi_t3; R^2: 0.994; equation: y = 0.996x + 0.0117</code></pre>
 <pre><code>## Writing summary information.</code></pre>
-<pre><code>## Attempting to add the comparison plot to pairwise_summary at row: 36 and column: 1</code></pre>
+<pre><code>## Attempting to add the comparison plot to pairwise_summary at row: 28 and column: 1</code></pre>
 <pre><code>## 
   |                                                                       
   |                                                                 |   0%
   |                                                                       
-  |====                                                             |   6%
+  |======                                                           |  10%
   |                                                                       
-  |=======                                                          |  11%
+  |=============                                                    |  20%
   |                                                                       
-  |===========                                                      |  17%
+  |====================                                             |  30%
   |                                                                       
-  |==============                                                   |  22%
-  |                                                                       
-  |==================                                               |  28%
-  |                                                                       
-  |======================                                           |  33%
-  |                                                                       
-  |=========================                                        |  39%
-  |                                                                       
-  |=============================                                    |  44%
+  |==========================                                       |  40%
   |                                                                       
   |================================                                 |  50%
   |                                                                       
-  |====================================                             |  56%
+  |=======================================                          |  60%
   |                                                                       
-  |========================================                         |  61%
+  |==============================================                   |  70%
   |                                                                       
-  |===========================================                      |  67%
+  |====================================================             |  80%
   |                                                                       
-  |===============================================                  |  72%
-  |                                                                       
-  |===================================================              |  78%
-  |                                                                       
-  |======================================================           |  83%
-  |                                                                       
-  |==========================================================       |  89%
-  |                                                                       
-  |=============================================================    |  94%
+  |==========================================================       |  90%
   |                                                                       
   |=================================================================| 100%</code></pre>
 <pre><code>## Performing save of the workbook.</code></pre>
-<pre class="r"><code>sig_write &lt;- extract_significant_genes(initial_write, excel=&quot;excel/significant-v&quot;, ver, &quot;.xlsx&quot;)</code></pre>
-<pre><code>## Writing a legend of columns.</code></pre>
-<pre><code>## Do not know this according type.</code></pre>
-<pre><code>## Writing excel data for rpmi_t2_vs_thy_t1: 1/18.</code></pre>
-<pre><code>## There is no 20180717_logfc column in the table.</code></pre>
-<pre><code>## The columns are: seqnames, start, end, width, strand, type, locustag, inference, note, codonstart, transltable, product, proteinid, translation, ecnumber, genesynonym, geneid, transcriptid, limma_logfc, limma_adjp, deseq_logfc, deseq_adjp, edger_logfc, edger_adjp, limma_ave, limma_t, limma_b, limma_p, deseq_basemean, deseq_lfcse, deseq_stat, deseq_p, edger_logcpm, edger_lr, edger_p, basic_nummed, basic_denmed, basic_numvar, basic_denvar, basic_logfc, basic_t, basic_p, basic_adjp, limma_adjp_fdr, deseq_adjp_fdr, edger_adjp_fdr, basic_adjp_fdr, lfc_meta, lfc_var, lfc_varbymed, p_meta, p_var</code></pre>
-<pre><code>## Error in get_sig_genes(table, lfc = lfc, p = p, z = z, n = n, column = fc_column, : There is no 20180717_logfc column in the table.</code></pre>
+<pre class="r"><code>sig_write &lt;- sm(extract_significant_genes(initial_write,
+                                          excel=paste0(&quot;excel/significant-v&quot;, ver, &quot;.xlsx&quot;)))</code></pre>
 <pre class="r"><code>message(paste0(&quot;This is hpgltools commit: &quot;, get_git_commit()))</code></pre>
 <pre><code>## If you wish to reproduce this exact build of hpgltools, invoke the following:</code></pre>
 <pre><code>## &gt; git clone http://github.com/abelew/hpgltools.git</code></pre>
@@ -1874,7 +1806,7 @@ message(paste0(&quot;Saving to &quot;, this_save))</code></pre>
 <pre class="r"><code>tmp &lt;- sm(saveme(filename=this_save))</code></pre>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRGlmZmVyZW50aWFsIEV4cHJlc3Npb24gZm9yIFROU2VxIG9mIFNweW9nZW5lcy4gKDIwMTcpIgphdXRob3I6ICJhdGIiCmRhdGU6ICJgciBTeXMuRGF0ZSgpYCIKb3V0cHV0OgogaHRtbF9kb2N1bWVudDoKICBjb2RlX2Rvd25sb2FkOiB0cnVlCiAgY29kZV9mb2xkaW5nOiBzaG93CiAgZmlnX2NhcHRpb246IHRydWUKICBmaWdfaGVpZ2h0OiA3CiAgZmlnX3dpZHRoOiA3CiAgaGlnaGxpZ2h0OiBkZWZhdWx0CiAga2VlcF9tZDogZmFsc2UKICBtb2RlOiBzZWxmY29udGFpbmVkCiAgbnVtYmVyX3NlY3Rpb25zOiB0cnVlCiAgc2VsZl9jb250YWluZWQ6IHRydWUKICB0aGVtZTogcmVhZGFibGUKICB0b2M6IHRydWUKICB0b2NfZmxvYXQ6CiAgICBjb2xsYXBzZWQ6IGZhbHNlCiAgICBzbW9vdGhfc2Nyb2xsOiBmYWxzZQotLS0KCjxzdHlsZT4KICBib2R5IC5tYWluLWNvbnRhaW5lciB7CiAgICBtYXgtd2lkdGg6IDE2MDBweDsKfQo8L3N0eWxlPgoKYGBge3Igb3B0aW9ucywgaW5jbHVkZT1GQUxTRX0KIyMgVGhlc2UgYXJlIHRoZSBvcHRpb25zIEkgdGVuZCB0byBmYXZvcgpsaWJyYXJ5KCJocGdsdG9vbHMiKQp0dCA8LSBkZXZ0b29sczo6bG9hZF9hbGwoIn4vaHBnbHRvb2xzIikKa25pdHI6Om9wdHNfa25pdCRzZXQocHJvZ3Jlc3M9VFJVRSwKICAgICAgICAgICAgICAgICAgICAgdmVyYm9zZT1UUlVFLAogICAgICAgICAgICAgICAgICAgICB3aWR0aD05MCwKICAgICAgICAgICAgICAgICAgICAgZWNobz1UUlVFKQprbml0cjo6b3B0c19jaHVuayRzZXQoZXJyb3I9VFJVRSwKICAgICAgICAgICAgICAgICAgICAgIGZpZy53aWR0aD04LAogICAgICAgICAgICAgICAgICAgICAgZmlnLmhlaWdodD04LAogICAgICAgICAgICAgICAgICAgICAgZHBpPTk2KQpvcHRpb25zKGRpZ2l0cz00LAogICAgICAgIHN0cmluZ3NBc0ZhY3RvcnM9RkFMU0UsCiAgICAgICAga25pdHIuZHVwbGljYXRlLmxhYmVsPSJhbGxvdyIpCmdncGxvdDI6OnRoZW1lX3NldChnZ3Bsb3QyOjp0aGVtZV9idyhiYXNlX3NpemU9MTApKQpzZXQuc2VlZCgxKQpwcmV2aW91c19maWxlIDwtICIwMl9zYW1wbGVfZXN0aW1hdGlvbi5SbWQiCnZlciA8LSAiMjAxODA3MTciCgp0bXAgPC0gc20obG9hZG1lKGZpbGVuYW1lPXBhc3RlMChnc3ViKHBhdHRlcm49IlxcLlJtZCIsIHJlcGxhY2U9IiIsIHg9cHJldmlvdXNfZmlsZSksICItdiIsIHZlciwgIi5yZGEueHoiKSkpCgpybWRfZmlsZSA8LSAiMDNfZGlmZmVyZW50aWFsX2V4cHJlc3Npb24uUm1kIgpgYGAKCiMgRGlmZmVyZW50aWFsIEV4cHJlc3Npb24sIFNweW9nZW5lczogYHIgdmVyYAoKVGhpcyB3b3Jrc2hlZXQgcGVyZm9ybXMgYSBzZXQgb2YgcGFpcndpc2UgY29tcGFyaXNvbnMgb2YgdGhlIGNvdW50cyBmb3IgdGhpcyB0bnNlcSBleHBlcmltZW50CmdpdmVuIHRoZSBzdmEgc3Vycm9nYXRlIGFkanVzdG1lbnRzLgoKVGhpcyBpcyBiZWluZyBwZXJmb3JtZWQgdmlhIGxpbW1hL2VkZ2VyL2Rlc2VxMiwgd2hpY2ggb25lIG1heSByaWdodGx5IGFyZ3VlIGlzIG5vdAplbnRpcmVseSBhcHByb3ByaWF0ZSBmb3IgVE5TZXEgZGF0YS4gIE9uIHRoZSBvdGhlciBoYW5kLCBhcyBhIGdlbmVyYWwgbWV0cmljIG9mCmNoYW5naW5nIGZpdG5lc3MsIGl0IHByb3ZpZGVzIHNvbWUgaW50ZXJlc3RpbmcgaW5mb3JtYXRpb24uCgpgYGB7ciBpbml0aWFsX2VzdGltYXRpb24sIGZpZy5zaG93PSJoaWRlIn0KaW5pdGlhbF9kaWZmIDwtIGFsbF9wYWlyd2lzZShpbnB1dD1ycG1pX2ZpbHQsIG1vZGVsX2JhdGNoPSJmc3ZhIikKCmtlZXBlcnMgPC0gbGlzdCgidDJ0MSIgPSBjKCJycG1pX3QyIiwgInRoeV90MSIpLAogICAgICAgICAgICAgICAgInQzdDEiID0gYygicnBtaV90MyIsICJ0aHlfdDEiKSwKICAgICAgICAgICAgICAgICJ0MnpuIiA9IGMoInJwbWlfdDJfaGlnaHpuIiwgInJwbWlfdDJfbG93em4iKSwKICAgICAgICAgICAgICAgICJ0M3puIiA9IGMoInJwbWlfdDNfaGlnaHpuIiwgInJwbWlfdDNfbG93em4iKSwKICAgICAgICAgICAgICAgICJ0MmN1IiA9IGMoInJwbWlfdDJfaGlnaGN1IiwgInJwbWlfdDJfbG93Y3UiKSwKICAgICAgICAgICAgICAgICJ0M2N1IiA9IGMoInJwbWlfdDNfaGlnaGN1IiwgInJwbWlfdDNfbG93Y3UiKSwKICAgICAgICAgICAgICAgICJ0aW1lX2hpZ2h6biIgPSBjKCJycG1pX3QzX2hpZ2h6biIsICJycG1pX3QyX2hpZ2h6biIpLAogICAgICAgICAgICAgICAgInRpbWVfbG93em4iID0gYygicnBtaV90M19sb3d6biIsICJycG1pX3QyX2xvd3puIiksCiAgICAgICAgICAgICAgICAidGltZV9oaWdoY3UiID0gYygicnBtaV90M19oaWdoY3UiLCAicnBtaV90Ml9oaWdoY3UiKSwKICAgICAgICAgICAgICAgICJ0aW1lX2xvd2N1IiA9IGMoInJwbWlfdDNfbG93Y3UiLCAicnBtaV90Ml9sb3djdSIpLAogICAgICAgICAgICAgICAgInQyX3JwbWlfaGlnaHpuIiA9IGMoInJwbWlfdDJfaGlnaHpuIiwgInJwbWlfdDIiKSwKICAgICAgICAgICAgICAgICJ0M19ycG1pX2hpZ2h6biIgPSBjKCJycG1pX3QzX2hpZ2h6biIsICJycG1pX3QzIiksCiAgICAgICAgICAgICAgICAidDJfcnBtaV9sb3d6biIgPSBjKCJycG1pX3QyX2xvd3puIiwgInJwbWlfdDIiKSwKICAgICAgICAgICAgICAgICJ0M19ycG1pX2xvd3puIiA9IGMoInJwbWlfdDNfbG93em4iLCAicnBtaV90MyIpLAogICAgICAgICAgICAgICAgInQyX3JwbWlfaGlnaGN1IiA9IGMoInJwbWlfdDJfaGlnaGN1IiwgInJwbWlfdDIiKSwKICAgICAgICAgICAgICAgICJ0M19ycG1pX2hpZ2hjdSIgPSBjKCJycG1pX3QzX2hpZ2hjdSIsICJycG1pX3QzIiksCiAgICAgICAgICAgICAgICAidDJfcnBtaV9sb3djdSIgPSBjKCJycG1pX3QyX2xvd2N1IiwgInJwbWlfdDIiKSwKICAgICAgICAgICAgICAgICJ0M19ycG1pX2xvd2N1IiA9IGMoInJwbWlfdDNfbG93Y3UiLCAicnBtaV90MyIpKQppbml0aWFsX3dyaXRlIDwtIGNvbWJpbmVfZGVfdGFibGVzKGFsbF9wYWlyd2lzZV9yZXN1bHQ9aW5pdGlhbF9kaWZmLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGV4Y2VsPXBhc3RlMCgiZXhjZWwvaW5pdGlhbF9kaWZmLXYiLCB2ZXIsICIueGxzeCIpLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGtlZXBlcnM9a2VlcGVycykKc2lnX3dyaXRlIDwtIGV4dHJhY3Rfc2lnbmlmaWNhbnRfZ2VuZXMoaW5pdGlhbF93cml0ZSwgZXhjZWw9ImV4Y2VsL3NpZ25pZmljYW50LXYiLCB2ZXIsICIueGxzeCIpCmBgYAoKYGBge3Igc2F2ZW1lfQptZXNzYWdlKHBhc3RlMCgiVGhpcyBpcyBocGdsdG9vbHMgY29tbWl0OiAiLCBnZXRfZ2l0X2NvbW1pdCgpKSkKcGFuZGVyOjpwYW5kZXIoc2Vzc2lvbkluZm8oKSkKdGhpc19zYXZlIDwtIHBhc3RlMChnc3ViKHBhdHRlcm49IlxcLlJtZCIsIHJlcGxhY2U9IiIsIHg9cm1kX2ZpbGUpLCAiLXYiLCB2ZXIsICIucmRhLnh6IikKbWVzc2FnZShwYXN0ZTAoIlNhdmluZyB0byAiLCB0aGlzX3NhdmUpKQp0bXAgPC0gc20oc2F2ZW1lKGZpbGVuYW1lPXRoaXNfc2F2ZSkpCmBgYAo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRGlmZmVyZW50aWFsIEV4cHJlc3Npb24gZm9yIFROU2VxIG9mIFNweW9nZW5lcy4gKDIwMTcpIgphdXRob3I6ICJhdGIiCmRhdGU6ICJgciBTeXMuRGF0ZSgpYCIKb3V0cHV0OgogaHRtbF9kb2N1bWVudDoKICBjb2RlX2Rvd25sb2FkOiB0cnVlCiAgY29kZV9mb2xkaW5nOiBzaG93CiAgZmlnX2NhcHRpb246IHRydWUKICBmaWdfaGVpZ2h0OiA3CiAgZmlnX3dpZHRoOiA3CiAgaGlnaGxpZ2h0OiBkZWZhdWx0CiAga2VlcF9tZDogZmFsc2UKICBtb2RlOiBzZWxmY29udGFpbmVkCiAgbnVtYmVyX3NlY3Rpb25zOiB0cnVlCiAgc2VsZl9jb250YWluZWQ6IHRydWUKICB0aGVtZTogcmVhZGFibGUKICB0b2M6IHRydWUKICB0b2NfZmxvYXQ6CiAgICBjb2xsYXBzZWQ6IGZhbHNlCiAgICBzbW9vdGhfc2Nyb2xsOiBmYWxzZQotLS0KCjxzdHlsZT4KICBib2R5IC5tYWluLWNvbnRhaW5lciB7CiAgICBtYXgtd2lkdGg6IDE2MDBweDsKfQo8L3N0eWxlPgoKYGBge3Igb3B0aW9ucywgaW5jbHVkZT1GQUxTRX0KIyMgVGhlc2UgYXJlIHRoZSBvcHRpb25zIEkgdGVuZCB0byBmYXZvcgpsaWJyYXJ5KCJocGdsdG9vbHMiKQp0dCA8LSBkZXZ0b29sczo6bG9hZF9hbGwoIn4vaHBnbHRvb2xzIikKa25pdHI6Om9wdHNfa25pdCRzZXQocHJvZ3Jlc3M9VFJVRSwKICAgICAgICAgICAgICAgICAgICAgdmVyYm9zZT1UUlVFLAogICAgICAgICAgICAgICAgICAgICB3aWR0aD05MCwKICAgICAgICAgICAgICAgICAgICAgZWNobz1UUlVFKQprbml0cjo6b3B0c19jaHVuayRzZXQoZXJyb3I9VFJVRSwKICAgICAgICAgICAgICAgICAgICAgIGZpZy53aWR0aD04LAogICAgICAgICAgICAgICAgICAgICAgZmlnLmhlaWdodD04LAogICAgICAgICAgICAgICAgICAgICAgZHBpPTk2KQpvcHRpb25zKGRpZ2l0cz00LAogICAgICAgIHN0cmluZ3NBc0ZhY3RvcnM9RkFMU0UsCiAgICAgICAga25pdHIuZHVwbGljYXRlLmxhYmVsPSJhbGxvdyIpCmdncGxvdDI6OnRoZW1lX3NldChnZ3Bsb3QyOjp0aGVtZV9idyhiYXNlX3NpemU9MTApKQpzZXQuc2VlZCgxKQpwcmV2aW91c19maWxlIDwtICIwMl9zYW1wbGVfZXN0aW1hdGlvbi5SbWQiCnZlciA8LSAiMjAxODA3MTciCgp0bXAgPC0gc20obG9hZG1lKGZpbGVuYW1lPXBhc3RlMChnc3ViKHBhdHRlcm49IlxcLlJtZCIsIHJlcGxhY2U9IiIsIHg9cHJldmlvdXNfZmlsZSksICItdiIsIHZlciwgIi5yZGEueHoiKSkpCgpybWRfZmlsZSA8LSAiMDNfZGlmZmVyZW50aWFsX2V4cHJlc3Npb24uUm1kIgpgYGAKCiMgRGlmZmVyZW50aWFsIEV4cHJlc3Npb24sIFNweW9nZW5lczogYHIgdmVyYAoKVGhpcyB3b3Jrc2hlZXQgcGVyZm9ybXMgYSBzZXQgb2YgcGFpcndpc2UgY29tcGFyaXNvbnMgb2YgdGhlIGNvdW50cyBmb3IgdGhpcyB0bnNlcSBleHBlcmltZW50CmdpdmVuIHRoZSBzdmEgc3Vycm9nYXRlIGFkanVzdG1lbnRzLgoKVGhpcyBpcyBiZWluZyBwZXJmb3JtZWQgdmlhIGxpbW1hL2VkZ2VyL2Rlc2VxMiwgd2hpY2ggb25lIG1heSByaWdodGx5IGFyZ3VlIGlzIG5vdAplbnRpcmVseSBhcHByb3ByaWF0ZSBmb3IgVE5TZXEgZGF0YS4gIE9uIHRoZSBvdGhlciBoYW5kLCBhcyBhIGdlbmVyYWwgbWV0cmljIG9mCmNoYW5naW5nIGZpdG5lc3MsIGl0IHByb3ZpZGVzIHNvbWUgaW50ZXJlc3RpbmcgaW5mb3JtYXRpb24uCgpgYGB7ciBpbml0aWFsX2VzdGltYXRpb24sIGZpZy5zaG93PSJoaWRlIn0KaW5pdGlhbF9kaWZmIDwtIGFsbF9wYWlyd2lzZShpbnB1dD1ycG1pX2ZpbHQsIG1vZGVsX2JhdGNoPSJmc3ZhIikKCmtlZXBlcnMgPC0gbGlzdCgidDJ0MSIgPSBjKCJycG1pX3QyIiwgInRoeV90MSIpLAogICAgICAgICAgICAgICAgInQzdDEiID0gYygicnBtaV90MyIsICJ0aHlfdDEiKSwKICAgICAgICAgICAgICAgICJ0MnpuIiA9IGMoInJwbWlfdDJfaGlnaHpuIiwgInJwbWlfdDJfbG93em4iKSwKICAgICAgICAgICAgICAgICJ0M3puIiA9IGMoInJwbWlfdDNfaGlnaHpuIiwgInJwbWlfdDNfbG93em4iKSwKIyMgICAgICAgICAgICAgICAgInQyY3UiID0gYygicnBtaV90Ml9oaWdoY3UiLCAicnBtaV90Ml9sb3djdSIpLAojIyAgICAgICAgICAgICAgICAidDNjdSIgPSBjKCJycG1pX3QzX2hpZ2hjdSIsICJycG1pX3QzX2xvd2N1IiksCiAgICAgICAgICAgICAgICAidGltZV9oaWdoem4iID0gYygicnBtaV90M19oaWdoem4iLCAicnBtaV90Ml9oaWdoem4iKSwKICAgICAgICAgICAgICAgICJ0aW1lX2xvd3puIiA9IGMoInJwbWlfdDNfbG93em4iLCAicnBtaV90Ml9sb3d6biIpLAojIyAgICAgICAgICAgICAgICAidGltZV9oaWdoY3UiID0gYygicnBtaV90M19oaWdoY3UiLCAicnBtaV90Ml9oaWdoY3UiKSwKIyMgICAgICAgICAgICAgICAgInRpbWVfbG93Y3UiID0gYygicnBtaV90M19sb3djdSIsICJycG1pX3QyX2xvd2N1IiksCiAgICAgICAgICAgICAgICAidDJfcnBtaV9oaWdoem4iID0gYygicnBtaV90Ml9oaWdoem4iLCAicnBtaV90MiIpLAogICAgICAgICAgICAgICAgInQzX3JwbWlfaGlnaHpuIiA9IGMoInJwbWlfdDNfaGlnaHpuIiwgInJwbWlfdDMiKSwKICAgICAgICAgICAgICAgICJ0Ml9ycG1pX2xvd3puIiA9IGMoInJwbWlfdDJfbG93em4iLCAicnBtaV90MiIpLAogICAgICAgICAgICAgICAgInQzX3JwbWlfbG93em4iID0gYygicnBtaV90M19sb3d6biIsICJycG1pX3QzIikKIyMgICAgICAgICAgICAgICAgInQyX3JwbWlfaGlnaGN1IiA9IGMoInJwbWlfdDJfaGlnaGN1IiwgInJwbWlfdDIiKSwKIyMgICAgICAgICAgICAgICAgInQzX3JwbWlfaGlnaGN1IiA9IGMoInJwbWlfdDNfaGlnaGN1IiwgInJwbWlfdDMiKSwKIyMgICAgICAgICAgICAgICAgInQyX3JwbWlfbG93Y3UiID0gYygicnBtaV90Ml9sb3djdSIsICJycG1pX3QyIiksCiMjICAgICAgICAgICAgICAgICJ0M19ycG1pX2xvd2N1IiA9IGMoInJwbWlfdDNfbG93Y3UiLCAicnBtaV90MyIpKQogICAgICAgICAgICAgICAgKQppbml0aWFsX3dyaXRlIDwtIGNvbWJpbmVfZGVfdGFibGVzKGFsbF9wYWlyd2lzZV9yZXN1bHQ9aW5pdGlhbF9kaWZmLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGV4Y2VsPXBhc3RlMCgiZXhjZWwvaW5pdGlhbF9kaWZmLXYiLCB2ZXIsICIueGxzeCIpLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGtlZXBlcnM9a2VlcGVycykKc2lnX3dyaXRlIDwtIHNtKGV4dHJhY3Rfc2lnbmlmaWNhbnRfZ2VuZXMoaW5pdGlhbF93cml0ZSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZXhjZWw9cGFzdGUwKCJleGNlbC9zaWduaWZpY2FudC12IiwgdmVyLCAiLnhsc3giKSkpCmBgYAoKYGBge3Igc2F2ZW1lfQptZXNzYWdlKHBhc3RlMCgiVGhpcyBpcyBocGdsdG9vbHMgY29tbWl0OiAiLCBnZXRfZ2l0X2NvbW1pdCgpKSkKcGFuZGVyOjpwYW5kZXIoc2Vzc2lvbkluZm8oKSkKdGhpc19zYXZlIDwtIHBhc3RlMChnc3ViKHBhdHRlcm49IlxcLlJtZCIsIHJlcGxhY2U9IiIsIHg9cm1kX2ZpbGUpLCAiLXYiLCB2ZXIsICIucmRhLnh6IikKbWVzc2FnZShwYXN0ZTAoIlNhdmluZyB0byAiLCB0aGlzX3NhdmUpKQp0bXAgPC0gc20oc2F2ZW1lKGZpbGVuYW1lPXRoaXNfc2F2ZSkpCmBgYAo=</div>
 
 
 </div>

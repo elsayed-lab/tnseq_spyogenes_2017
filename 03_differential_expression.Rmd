@@ -68,24 +68,26 @@ keepers <- list("t2t1" = c("rpmi_t2", "thy_t1"),
                 "t3t1" = c("rpmi_t3", "thy_t1"),
                 "t2zn" = c("rpmi_t2_highzn", "rpmi_t2_lowzn"),
                 "t3zn" = c("rpmi_t3_highzn", "rpmi_t3_lowzn"),
-                "t2cu" = c("rpmi_t2_highcu", "rpmi_t2_lowcu"),
-                "t3cu" = c("rpmi_t3_highcu", "rpmi_t3_lowcu"),
+##                "t2cu" = c("rpmi_t2_highcu", "rpmi_t2_lowcu"),
+##                "t3cu" = c("rpmi_t3_highcu", "rpmi_t3_lowcu"),
                 "time_highzn" = c("rpmi_t3_highzn", "rpmi_t2_highzn"),
                 "time_lowzn" = c("rpmi_t3_lowzn", "rpmi_t2_lowzn"),
-                "time_highcu" = c("rpmi_t3_highcu", "rpmi_t2_highcu"),
-                "time_lowcu" = c("rpmi_t3_lowcu", "rpmi_t2_lowcu"),
+##                "time_highcu" = c("rpmi_t3_highcu", "rpmi_t2_highcu"),
+##                "time_lowcu" = c("rpmi_t3_lowcu", "rpmi_t2_lowcu"),
                 "t2_rpmi_highzn" = c("rpmi_t2_highzn", "rpmi_t2"),
                 "t3_rpmi_highzn" = c("rpmi_t3_highzn", "rpmi_t3"),
                 "t2_rpmi_lowzn" = c("rpmi_t2_lowzn", "rpmi_t2"),
-                "t3_rpmi_lowzn" = c("rpmi_t3_lowzn", "rpmi_t3"),
-                "t2_rpmi_highcu" = c("rpmi_t2_highcu", "rpmi_t2"),
-                "t3_rpmi_highcu" = c("rpmi_t3_highcu", "rpmi_t3"),
-                "t2_rpmi_lowcu" = c("rpmi_t2_lowcu", "rpmi_t2"),
-                "t3_rpmi_lowcu" = c("rpmi_t3_lowcu", "rpmi_t3"))
+                "t3_rpmi_lowzn" = c("rpmi_t3_lowzn", "rpmi_t3")
+##                "t2_rpmi_highcu" = c("rpmi_t2_highcu", "rpmi_t2"),
+##                "t3_rpmi_highcu" = c("rpmi_t3_highcu", "rpmi_t3"),
+##                "t2_rpmi_lowcu" = c("rpmi_t2_lowcu", "rpmi_t2"),
+##                "t3_rpmi_lowcu" = c("rpmi_t3_lowcu", "rpmi_t3"))
+                )
 initial_write <- combine_de_tables(all_pairwise_result=initial_diff,
                                    excel=paste0("excel/initial_diff-v", ver, ".xlsx"),
                                    keepers=keepers)
-sig_write <- extract_significant_genes(initial_write, excel="excel/significant-v", ver, ".xlsx")
+sig_write <- sm(extract_significant_genes(initial_write,
+                                          excel=paste0("excel/significant-v", ver, ".xlsx")))
 ```
 
 ```{r saveme}
