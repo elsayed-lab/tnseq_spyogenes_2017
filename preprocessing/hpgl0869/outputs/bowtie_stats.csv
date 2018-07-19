@@ -1,0 +1,5 @@
+name,type,original_reads,reads,one_hits,failed,samples,rpm,count_table
+hpgl0869-trimmed_ca_ta,v0M1,0,0,0,0,0,0,hpgl0869-trimmed_ca_ta-v0M1.count.xz
+hpgl0869-trimmed_ca_ta,def,0,0,0,0,0,0,hpgl0869-trimmed_ca_ta-def.count.xz
+hpgl0869,def,0,8199283,8090402,108881,0,0.123603252347658,hpgl0869-def.count.xz
+hpgl0869,v0M1,0,8199283,7649626,192967,356690,0.130725345265246,hpgl0869-v0M1.count.xz

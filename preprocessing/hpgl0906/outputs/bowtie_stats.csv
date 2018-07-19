@@ -1,0 +1,3 @@
+name,type,original_reads,reads,one_hits,failed,samples,rpm,count_table
+hpgl0906,v0M1,0,6864676,6512685,205492,146499,0.153546501941979,hpgl0906-v0M1.count.xz
+hpgl0906,def,0,6864676,6778489,86187,0,0.147525503102535,hpgl0906-def.count.xz

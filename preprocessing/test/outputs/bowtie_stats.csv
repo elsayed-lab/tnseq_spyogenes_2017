@@ -1,0 +1,4 @@
+name,type,original_reads,reads,one_hits,failed,samples,rpm,count_table
+test,v0M1,0,5000,4701,112,187,212.720697723889,test-v0M1.count.xz
+test,def,0,5000,4985,15,0,200.601805416249,test-def.count.xz
+test,v1M1,0,5000,3872,23,1105,258.264462809917,test-v1M1.count.xz
