@@ -1,6 +1,6 @@
 # Some TNSeq analyses of S.pyogenes 5448
 
-[![DOI](https://zenodo.org/badge/141313240.svg)](https://zenodo.org/badge/latestdoi/141313240)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2541163.svg)](https://doi.org/10.5281/zenodo.2541163)
 
 These analyses seek to repeat the processing employed in Yoann's first TNSeq
 paper with some minor improvements in index demultiplexing.
