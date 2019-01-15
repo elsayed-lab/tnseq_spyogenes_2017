@@ -139,7 +139,7 @@ analyses; ideally these will not change the final results, but lets find out!
 ## Annotation collection
 
 The file
-[https://github.com/elsayed-lab/tnseq_spyogenes_2017/blob/master/01_annotation.Rmd](01_annotation.Rmd)
+[01_annotation.Rmd](01_annotation.Rmd)
 comprises the methods employed to collect the appropriate S. pyogenes
 annotations.  The methods employed were to query the microbesonline database
 http://microbesonline.org and to gather gene IDs from the gff file used during
@@ -151,7 +151,7 @@ In order to view the relationships of the samples, hpgltools was used to
 visualize the matrices created by the htseq-generated count tables.  In this
 process, the count tables, annotations, and sample sheet were combined into an
 expressionset and queried with various normalizations and plots as outlined in
-[https://github.com/elsayed-lab/tnseq_spyogenes_2017/blob/master/02_sample_estimation.Rmd](02_sample_estimation.Rmd).
+[02_sample_estimation.Rmd](02_sample_estimation.Rmd).
 
 ## Simple fitness metric
 
@@ -159,4 +159,4 @@ The htseq count tables from the alignment were used to calculate a simplified
 metric of 'fitness'.  This process used the hpgltools to invoke
 limma/deseq2/edger, combine their outputs, and look for genes observed to be
 significantly increased/decreased.  The methods employed are outlined in
-[https://github.com/elsayed-lab/tnseq_spyogenes_2017/blob/master/03_differential_expression.Rmd](03_differential_expression.Rmd).
+[03_differential_expression.Rmd](03_differential_expression.Rmd).
