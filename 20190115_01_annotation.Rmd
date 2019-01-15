@@ -1,0 +1,159 @@
+---
+title: "20190116: Annotation data for RNAseq/TNSeq of S.pyogenes (2017)"
+author: "atb abelew@gmail.com"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_download: true
+    code_folding: show
+    fig_caption: true
+    fig_height: 7
+    fig_width: 7
+    highlight: tango
+    keep_md: false
+    mode: selfcontained
+    number_sections: true
+    self_contained: true
+    theme: readable
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+  rmdformats::readthedown:
+    code_download: true
+    code_folding: show
+    df_print: paged
+    fig_caption: true
+    fig_height: 7
+    fig_width: 7
+    highlight: tango
+    width: 300
+    keep_md: false
+    mode: selfcontained
+    toc_float: true
+  BiocStyle::html_document:
+    code_download: true
+    code_folding: show
+    fig_caption: true
+    fig_height: 7
+    fig_width: 7
+    highlight: tango
+    keep_md: false
+    mode: selfcontained
+    toc_float: true
+---
+
+<style type="text/css">
+body, td {
+  font-size: 16px;
+}
+code.r{
+  font-size: 16px;
+}
+pre {
+ font-size: 16px
+}
+</style>
+
+
+```{r options, include=FALSE}
+library("hpgltools")
+tt <- devtools::load_all("~/hpgltools")
+knitr::opts_knit$set(width=120,
+                     progress=TRUE,
+                     verbose=TRUE,
+                     echo=TRUE)
+knitr::opts_chunk$set(error=TRUE,
+                      dpi=96)
+old_options <- options(digits=4,
+                       max.print=120,
+                       stringsAsFactors=FALSE,
+                       knitr.duplicate.label="allow")
+ggplot2::theme_set(ggplot2::theme_bw(base_size=10))
+rundate <- format(Sys.Date(), format="%Y%m%d")
+previous_file <- "index.Rmd"
+ver <- "20190115"
+
+tmp <- try(sm(loadme(filename=paste0(gsub(pattern="\\.Rmd", replace="", x=previous_file), "-v", ver, ".rda.xz"))))
+rmd_file <- "20190115_01_annotation.Rmd"
+```
+
+# Annotation version: `r ver`
+
+This worksheet is intended to gather annotation data for use when looking at
+tnseq analyses of S.pyogenes strain 5448.  The analyses were performed in July
+2017, but I am re-running them in 2018 to make sure that all the code still works.
+
+There are a few methods of importing annotation data into R.  The following
+illustrate some of them.
+
+## Read a genbank accession directly
+
+The function load_genbank_annotations() should download the .gb file from
+genbank, read it, and provide a set of data frames which are useful.
+
+```{r gbk2txdb}
+mgas_data <- sm(load_genbank_annotations(accession="CP008776"))
+genome_size <- GenomicRanges::width(mgas_data$seq)  ## This fails on travis?
+mgas_cds <- as.data.frame(mgas_data$cds)
+## Get rid of amino acid sequence
+mgas_cds <- mgas_cds[-15]
+mgas_cds <- mgas_cds[-16]
+rownames(mgas_cds) <- mgas_cds[["locus_tag"]]
+summary(mgas_data)
+
+nc_features <- as.data.frame(mgas_data$others)
+write.csv(nc_features, file="nc_features.csv")
+cds_features <- as.data.frame(mgas_data$cds)
+write.csv(cds_features, file="cds_features.csv")
+```
+
+## Microbesonline
+
+Another source of good annotation data for bacterial species is microbesonline.
+Its only real annoyance is that it has a whole new set of identifiers for the
+various species it contains, and my function which gathers them apparently
+caused it to throw errors internally.  Thus, in order to get the genome ID, I
+need to go to microbesonline.org and ask it explicitly; ergo the arbitrary number below.
+
+```{r microbesonline}
+##microbe_ids <- get_microbesonline_ids("pyogenes")
+##microbe_ids
+microbe_ids <- 293653  ## MGAS5005
+mgas_df <- load_microbesonline_annotations(microbe_ids)
+```
+
+## Read a gff file
+
+In contrast, it is possible to load most annotations of interest directly from the gff files used in
+the alignments.  More in-depth information for the human transcriptome may be extracted from biomart.
+
+```{r genome_input, eval=FALSE}
+## The old way of getting genome/annotation data
+sp_gff <- "reference/mgas_5448.gff"
+sp_fasta <- "reference/mgas_5448.fasta"
+sp_annotations <- load_gff_annotations(sp_gff, type="gene")
+```
+
+# Create expt
+
+We have some annotations and will now create an expt containing the annotations
+and count data.
+
+The create_expt() function brings together the annotation data, the count tables
+in the sample sheet, and the metadata in the sample sheet into a canonical R
+expressionSet.  It then adds a small amount of extra information (sample colors,
+for example), and recasts it as an expt.
+
+```{r create_expt}
+sp_expt <- sm(create_expt(metadata="sample_sheets/samples_v3.xlsx", gene_info=mgas_cds))
+knitr::kable(pData(sp_expt))
+```
+
+```{r saveme}
+pander::pander(sessionInfo())
+message(paste0("This is hpgltools commit: ", get_git_commit()))
+this_save <- paste0(gsub(pattern="\\.Rmd", replace="", x=rmd_file), "-v", ver, ".rda.xz")
+message(paste0("Saving to ", this_save))
+tmp <- sm(saveme(filename=this_save))
+```

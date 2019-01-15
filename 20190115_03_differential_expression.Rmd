@@ -1,0 +1,166 @@
+---
+title: "20190116: Differential Expression for TNSeq of Spyogenes. (2017)"
+author: "atb"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_download: true
+    code_folding: show
+    fig_caption: true
+    fig_height: 7
+    fig_width: 7
+    highlight: tango
+    keep_md: false
+    mode: selfcontained
+    number_sections: true
+    self_contained: true
+    theme: readable
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+  rmdformats::readthedown:
+    code_download: true
+    code_folding: show
+    df_print: paged
+    fig_caption: true
+    fig_height: 7
+    fig_width: 7
+    highlight: tango
+    width: 300
+    keep_md: false
+    mode: selfcontained
+    toc_float: true
+  BiocStyle::html_document:
+    code_download: true
+    code_folding: show
+    fig_caption: true
+    fig_height: 7
+    fig_width: 7
+    highlight: tango
+    keep_md: false
+    mode: selfcontained
+    toc_float: true
+---
+
+<style type="text/css">
+body, td {
+  font-size: 16px;
+}
+code.r{
+  font-size: 16px;
+}
+pre {
+ font-size: 16px
+}
+</style>
+
+```{r options, include=FALSE}
+library("hpgltools")
+tt <- devtools::load_all("~/hpgltools")
+knitr::opts_knit$set(width=120,
+                     progress=TRUE,
+                     verbose=TRUE,
+                     echo=TRUE)
+knitr::opts_chunk$set(error=TRUE,
+                      dpi=96)
+old_options <- options(digits=4,
+                       max.print=120,
+                       stringsAsFactors=FALSE,
+                       knitr.duplicate.label="allow")
+ggplot2::theme_set(ggplot2::theme_bw(base_size=10))
+rundate <- format(Sys.Date(), format="%Y%m%d")
+previous_file <- "20190115_02_sample_estimation.Rmd"
+ver <- "20190115"
+
+tmp <- sm(loadme(filename=paste0(gsub(pattern="\\.Rmd", replace="", x=previous_file), "-v", ver, ".rda.xz")))
+
+rmd_file <- "20190115_03_differential_expression.Rmd"
+```
+
+# Differential Expression, Spyogenes: `r ver`
+
+This worksheet performs a set of pairwise comparisons of the counts for this tnseq experiment
+given the sva surrogate adjustments.
+
+This is being performed via limma/edger/deseq2, which one may rightly argue is not
+entirely appropriate for TNSeq data.  On the other hand, as a general metric of
+changing fitness, it provides some interesting information.
+
+## Perform Pairwise analyses
+
+```{r initial_estimation, fig.show="hide"}
+initial_diff <- sm(all_pairwise(input=rpmi_filt, model_batch="svaseq"))
+```
+
+all_pairwise() is responsible for following:
+
+1.  Creating an experimental model which includes surrogate estimates from svaseq.
+2.  Calling limma, EdgeR, and DESEq2 with the data and that model for every
+    possible pairwise contrast in the data. (Optionally it will now do EBSeq, too.)
+3.  Calling a basic method which simply subtracts log2 scaled values as a form
+    of negative control.
+4.  Collecting those results.
+
+Among the summaries it provides is a heatmap of how similar each method was for
+every contrast.
+
+```{r compare_heatmap}
+initial_diff$comparison$heat
+## All contrasts are quite similar.
+## The lowest correlation coefficient among the methods/contrasts is ~ 0.6 and is
+## between the 'real' methods and my stupid basic method, which mostly tells me
+## that sva actually did something.
+initial_diff$comparison[[7]]
+## Here we see that the log2FCs from limma and DESeq2 are very similar.
+## The blue line is the identity; so DESeq is seeing slightly higher
+## values than limma almost across the board.
+initial_diff$comparison[[9]]
+## The lower correlation for the basic is clearly coming from that blob near 0 logFC,
+## but for the most part, basic agrees with the sva adjusted limma.
+```
+
+## Combine the tables
+
+combine_de_tables() does what it says on the tin.  When provided an excel
+filename, it will also put the combined tables into the excel file and try to
+add in some pretty plots to the resulting excel file.
+
+```{r combine}
+keepers <- list("t2t1" = c("rpmi_t2", "thy_t1"),
+                "t3t1" = c("rpmi_t3", "thy_t1"),
+                "t2zn" = c("rpmi_t2_highzn", "rpmi_t2_lowzn"),
+                "t3zn" = c("rpmi_t3_highzn", "rpmi_t3_lowzn"),
+                "time_highzn" = c("rpmi_t3_highzn", "rpmi_t2_highzn"),
+                "time_lowzn" = c("rpmi_t3_lowzn", "rpmi_t2_lowzn"),
+                "t2_rpmi_highzn" = c("rpmi_t2_highzn", "rpmi_t2"),
+                "t3_rpmi_highzn" = c("rpmi_t3_highzn", "rpmi_t3"),
+                "t2_rpmi_lowzn" = c("rpmi_t2_lowzn", "rpmi_t2"),
+                "t3_rpmi_lowzn" = c("rpmi_t3_lowzn", "rpmi_t3")
+                )
+## Each element of keepers it a name of the contrast to perform followed by a 2 element list
+## with the numerator and denominator.
+initial_write <- sm(combine_de_tables(initial_diff,
+                                      excel=paste0("excel/", rundate, "_initial_diff-v", ver, ".xlsx"),
+                                      keepers=keepers))
+```
+
+The data generated by combine_de_tables() is supposed to give me some plots
+which we may use to evaluate how well the data came together as well as how
+similar the final results are for limma/deseq/edger.
+
+## Find significant genes
+
+```{r significance}
+sig_write <- sm(extract_significant_genes(
+  initial_write,
+  excel=paste0("excel/", rundate, "_significant-v", ver, ".xlsx")))
+```
+
+```{r saveme}
+message(paste0("This is hpgltools commit: ", get_git_commit()))
+pander::pander(sessionInfo())
+this_save <- paste0(gsub(pattern="\\.Rmd", replace="", x=rmd_file), "-v", ver, ".rda.xz")
+message(paste0("Saving to ", this_save))
+tmp <- sm(saveme(filename=this_save))
+```

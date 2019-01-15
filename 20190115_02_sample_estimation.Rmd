@@ -1,0 +1,211 @@
+---
+title: "20190116: Sample estimation for TNSeq of Spyogenes (2017 including Andrew)."
+author: "atb"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_download: true
+    code_folding: show
+    fig_caption: true
+    fig_height: 7
+    fig_width: 7
+    highlight: tango
+    keep_md: false
+    mode: selfcontained
+    number_sections: true
+    self_contained: true
+    theme: readable
+    toc: true
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+  rmdformats::readthedown:
+    code_download: true
+    code_folding: show
+    df_print: paged
+    fig_caption: true
+    fig_height: 7
+    fig_width: 7
+    highlight: tango
+    width: 300
+    keep_md: false
+    mode: selfcontained
+    toc_float: true
+  BiocStyle::html_document:
+    code_download: true
+    code_folding: show
+    fig_caption: true
+    fig_height: 7
+    fig_width: 7
+    highlight: tango
+    keep_md: false
+    mode: selfcontained
+    toc_float: true
+---
+
+<style type="text/css">
+body, td {
+  font-size: 16px;
+}
+code.r{
+  font-size: 16px;
+}
+pre {
+ font-size: 16px
+}
+</style>
+
+```{r options, include=FALSE}
+library("hpgltools")
+tt <- devtools::load_all("~/hpgltools")
+knitr::opts_knit$set(width=120,
+                     progress=TRUE,
+                     verbose=TRUE,
+                     echo=TRUE)
+knitr::opts_chunk$set(error=TRUE,
+                      dpi=96)
+old_options <- options(digits=4,
+                       max.print=120,
+                       stringsAsFactors=FALSE,
+                       knitr.duplicate.label="allow")
+ggplot2::theme_set(ggplot2::theme_bw(base_size=10))
+rundate <- format(Sys.Date(), format="%Y%m%d")
+previous_file <- "20190115_01_annotation.Rmd"
+ver <- "20190115"
+
+tmp <- sm(loadme(filename=paste0(gsub(pattern="\\.Rmd", replace="", x=previous_file), "-v", ver, ".rda.xz")))
+
+rmd_file <- "20190115_02_sample_estimation.Rmd"
+```
+
+# `r rundate` Sample Estimation, Spyogenes: `r ver`
+
+This document is concerned with analyzing TNSeq from S.pyogenes, primarily from
+the perspective of changing Zn concentration in the media.  This was done with
+samples where Cu concentrations were changed; those are not included in the
+final analyses, but are important for the variance calculations and so are kept
+here.
+
+## Extract the relevant samples
+
+There were some other samples in this series of runs which were not relevant; so
+lets subset the data to include only the relevant samples.
+
+```{r extract_samples}
+rpmi_expt <- subset_expt(expt=sp_expt, subset="experiment=='metal homeostasis'")
+```
+
+## Plot samples of the raw data
+
+```{r initial_estimation, fig.show="hide"}
+rpmi_metrics <- sm(graph_metrics(expt=rpmi_expt))
+```
+
+I am doing this fresh after a long time; I don't really remember what these
+plots look like, but I am betting there is a huge batch-like effect which
+depends on the library precursor.  But before that, let us look at their
+saturations and other metrics.
+
+```{r plot_initial_estimates}
+rpmi_metrics$legend
+## Don't forget to print the legend!
+rpmi_metrics$libsize
+## So the saddest library has 3,922,047 reads, that is not terrible I think.
+## A few samples might be a problem: hpgl0898, hpgl0879; but I am guessing a factor
+## of <4 between the highest and lowest samples should not be too big of a problem.
+rpmi_metrics$nonzero
+## Lower y-axis samples are more likely to be troublesome (looking at you hpgl0866, 898, 878, 869).
+rpmi_metrics$corheat
+## There is a pretty harsh batch-like effect
+rpmi_metrics$cvplot
+## But at least the coefficients of variance are similar.  wait, we only have 2 thy samples?
+rpmi_metrics$density
+## Nice, consistent sample densities
+```
+
+## Normalize and replot
+
+I just copied/pasted the following from the previous worksheet, but I am seeing
+that I did not actually use these plots.  I think I will leave them here for
+now.
+
+```{r norm_replot, fig.show="hide"}
+rpmi_filt <- sm(normalize_expt(rpmi_expt, filter=TRUE))
+## This will likely be our data for DE analyses.
+rpmi_norm <- sm(normalize_expt(rpmi_expt, filter=TRUE, convert="cpm", norm="quant",
+                               transform="log2"))
+## This, and a sva version of it, will be used for visualizing.
+rpmi_batch <- sm(normalize_expt(rpmi_filt, filter=TRUE, convert="cpm",
+                                batch="svaseq", transform="log2"))
+
+rpmi_norm_metrics <- sm(graph_metrics(rpmi_norm))
+rpmi_batch_metrics <- sm(graph_metrics(rpmi_batch))
+```
+
+## Now some plots from after normalization
+
+After log2 and such, PCA becomes informative.  Let us therefore look first at
+the clustering before any surrogate estimation.
+
+```{r mouse_show_images_post}
+norm_pca <- plot_pca(rpmi_norm, cis=FALSE)
+norm_pca$plot
+## This clustering is kind of terrible.
+rpmi_norm_metrics$disheat
+## This is going to be a problem.
+```
+
+So I think once again, the primary surrogate variable is not batch per se, but
+stems from how the libraries diverge after their selection but before
+collection/library prepration.
+
+## Try a couple of surrogate variables
+
+Given the wretched clustering observed, I figure I should try a couple tools
+from ruv/sva and see if they help.  It looks like I prefered fsva in my earlier
+iteration of this visualization.  I have since come to the feeling that fsva is
+a bit weird; and so I think I will use svaseq instead.
+
+```{r batch_testing}
+rpmi_batch1 <- sm(normalize_expt(rpmi_expt, transform="log2", convert="cpm",
+                                 filter=TRUE, batch="fsva"))
+plot_pca(rpmi_batch1)$plot
+plot_corheat(rpmi_batch1)$plot
+## This looks a bit more encouraging.
+
+rpmi_batch2 <- sm(normalize_expt(rpmi_expt, transform="log2", convert="cpm",
+                                 filter=TRUE, batch="svaseq"))
+plot_pca(rpmi_batch2)$plot
+## as does this.
+
+rpmi_batch_written <- sm(
+  write_expt(expt=rpmi_expt, transform="log2", convert="cpm",
+             filter=TRUE, batch="svaseq", violin=TRUE,
+             excel=paste0("excel/", rundate, "_rpmi_svaseq-v", ver, ".xlsx")))
+```
+
+```{r surrogate_testing}
+varpart_test <- varpart(expt=rpmi_filt, predictor=NULL,
+                        factors=c("coverage", "replicate", "time", "cuzn", "medium"))
+varpart_test$partition_plot
+varpart_test$percent_plot
+
+surrogate_test <- compare_surrogate_estimates(rpmi_filt)
+
+surrogate_test$sva_unsupervised_adjust$svs_sample
+rpmi_metrics$libsize
+## Given the contribution of coverage in the variancePartition results above, one might
+## assume that the library sizes will correspond to the surrogates detected by sva and friends.
+## This appears to not be the case.
+surrogate_test$plot
+## it looks like the various surrogate estimators mostly agree on this data --
+## especially the sva-based ones.
+```
+
+```{r saveme}
+message(paste0("This is hpgltools commit: ", get_git_commit()))
+pander::pander(sessionInfo())
+this_save <- paste0(gsub(pattern="\\.Rmd", replace="", x=rmd_file), "-v", ver, ".rda.xz")
+message(paste0("Saving to ", this_save))
+tmp <- sm(saveme(filename=this_save))
+```
