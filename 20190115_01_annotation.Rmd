@@ -128,11 +128,20 @@ mgas_df <- load_microbesonline_annotations(microbe_ids)
 In contrast, it is possible to load most annotations of interest directly from the gff files used in
 the alignments.  More in-depth information for the human transcriptome may be extracted from biomart.
 
-```{r genome_input, eval=FALSE}
+```{r genome_input}
 ## The old way of getting genome/annotation data
 sp_gff <- "reference/mgas_5448.gff"
 sp_fasta <- "reference/mgas_5448.fasta"
 sp_annotations <- load_gff_annotations(sp_gff, type="gene")
+```
+
+# Combine annotations
+
+Oh, now I remember, the annotations from microbesonline are actually for strain 5005.
+
+```{r gene_info_combined}
+head(mgas_cds)
+head(mgas_df$sysName)
 ```
 
 # Create expt
